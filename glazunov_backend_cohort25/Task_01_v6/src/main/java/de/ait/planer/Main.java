@@ -18,15 +18,14 @@ public class Main {
         EventController eventController = new EventController(scanner, eventService);
         System.out.println("Enter command: /add /prn /exit");
 
-        while (true){
-        String command = scanner.nextLine();
-            if(command.equals("prn")){
+        while (true) {
+            String command = scanner.nextLine();
+            if (command.equals("/prn")) {
                 eventController.printAllEvents();
-            }
-        if (command.equals("/add")) {
-            eventController.addEvent();
-        } else if (command.equals("/exit")){
-            break;
+            } else if (command.equals("/add")) {
+                eventController.addEvent();
+            } else if (command.equals("/exit")) {
+                break;
             }
 
         }

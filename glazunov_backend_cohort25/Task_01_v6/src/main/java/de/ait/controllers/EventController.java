@@ -28,15 +28,15 @@ public class EventController {
         System.out.println(event);
     }
 
-public void printAllEvents(){
+    public void printAllEvents() {
         List events = eventService.findAll();
-    for (int i = 0; i < events.size(); i++) {
-        System.out.println(events.get(i));
+        for (int i = 0; i < events.size(); i++) {
+            System.out.println(events.get(i));
+
+        }
+
     }
-
-
-    System.out.println(eventService.findAll().size());
 }
 
 
-}
+
