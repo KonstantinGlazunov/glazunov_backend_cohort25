@@ -1,7 +1,7 @@
-package de.ait.impl;
+package de.ait.repositories.impl;
 
-import models.Event;
-import repositories.EventsRepository;
+import de.ait.models.Event;
+import de.ait.repositories.EventsRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public class EventRepositoryListImpl implements EventsRepository {
 
     @Override
     public List<Event> findAll() {
-        return null;
+        return events;
     }
 
     @Override
@@ -39,8 +39,17 @@ public class EventRepositoryListImpl implements EventsRepository {
     }
 
     @Override
-    public Event findByTitle(String titel) {
-        return null;
+    public Event findByTitle(String title) {
+      /*  for (Event event : events ){
+            if (event.getTitle().equals(title)){
+                return event;
+            }
+        }
+        return null; */
+        return events.stream()
+                .filter(event -> event.getTitle().equals(title))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
