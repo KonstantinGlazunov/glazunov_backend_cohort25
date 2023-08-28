@@ -8,17 +8,18 @@ import org.mockito.Mockito;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @DisplayName("EventServiceImpl Is Works...")
 @DisplayNameGeneration(value = DisplayNameGenerator.ReplaceUnderscores.class)
 class EventServiceImplTest {
-
+private EventsRepository eventsRepository;
     private EventServiceImpl eventService;
 
     @BeforeEach
     public void setUp() {
-        EventsRepository eventsRepository = Mockito.mock(EventsRepository.class);
+        eventsRepository = Mockito.mock(EventsRepository.class);
         when(eventsRepository.findByTitle("Test title")).thenReturn(new Event("Test title",
                 LocalDate.of(2023, 12, 03),
                 LocalDate.of(2023, 12, 02)));
@@ -43,9 +44,13 @@ class EventServiceImplTest {
     @Test
     public void create_event_returns_created_event() {
 
-        assertThrows(IllegalArgumentException.class, () -> eventService.createEvent("Test no title",
-                LocalDate.of(2023, 12, 03),
-                LocalDate.of(2023, 12, 02)));
+         Event actual = eventService.createEvent("Test  title",
+                LocalDate.of(2023, 12, 01),
+                LocalDate.of(2023, 12, 03));
+ verify(eventsRepository).save(new Event("Test  title",
+                LocalDate.of(2023, 12, 01),
+                LocalDate.of(2023, 12, 03)));
+         assertNotNull(actual);
 
 
     }
