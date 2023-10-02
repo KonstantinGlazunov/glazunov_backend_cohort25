@@ -1,15 +1,16 @@
-package planer.services;
+package impl;
 
-import planer.models.Event;
-import planer.repositories.EventRepository;
+import models.Event;
+import repositories.EventsRepository;
+import services.EventService;
 
 import java.time.LocalDate;
 
-public class EventsService {
+public class EventServiceImpl implements EventService {
 
-    private final EventRepository eventRepository;
+    private final EventsRepository eventRepository;
 
-    public EventsService(EventRepository userRepository) {
+    public EventServiceImpl(EventsRepository userRepository) {
         this.eventRepository = userRepository;
     }
 

@@ -4,7 +4,7 @@ import planer.models.Event;
 
 import java.time.LocalDate;
 
-public interface EventRepository extends CrudRepository<Event> {
+public interface EventsRepository extends CrudRepository<Event> {
 
 
 Event findByTitle(String title);

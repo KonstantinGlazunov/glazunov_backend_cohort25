@@ -1,21 +1,23 @@
-package planer.services;
+package services.impl;
 
-import planer.models.Event;
-import planer.repositories.EventRepository;
+import models.Event;
+import repositories.EventsRepository;
+import services.EventService;
 
 import java.time.LocalDate;
 
-public class EventsService {
+public class EventServiceImpl implements EventService {
 
-    private final EventRepository eventRepository;
-    public EventsService(EventRepository userRepository) {
+    private final EventsRepository eventRepository;
+
+    public EventServiceImpl(EventsRepository userRepository) {
         this.eventRepository = userRepository;
     }
 
 
     public Event createEvent(String title, LocalDate startDate, LocalDate endDate) {
         if (title == null || title.equals("") || title.equals(" ")) {
-            throw new IllegalArgumentException("Title is required field");
+            throw new IllegalArgumentException("Titel is required field");
         }
         if (endDate.isBefore(startDate)) {
             throw new IllegalArgumentException("End data can not be before start data");

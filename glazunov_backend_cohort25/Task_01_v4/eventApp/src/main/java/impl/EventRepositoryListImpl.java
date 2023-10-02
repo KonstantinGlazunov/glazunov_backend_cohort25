@@ -1,11 +1,16 @@
-package planer.repositories;
+package impl;
 
-import planer.models.Event;
+import models.Event;
+import repositories.EventsRepository;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
-public class EventRepositoryListImpl implements EventRepository {
+public class EventRepositoryListImpl implements EventsRepository {
+    private final List<Event> events = new ArrayList<>();
+    private Long generatedId = 1L;
+
     @Override
     public Event findBiId(Long id) {
         return null;
@@ -17,8 +22,10 @@ public class EventRepositoryListImpl implements EventRepository {
     }
 
     @Override
-    public void save(Event model) {
-
+    public void save(Event event) {
+        events.add(event);
+        event.setId(generatedId);
+        generatedId++;
     }
 
     @Override

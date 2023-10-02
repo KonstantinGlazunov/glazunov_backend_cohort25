@@ -41,21 +41,21 @@ class EventServiceImplTest {
     @DisplayName(("createEvent"))
     class CreateEvent {
         @Test
-        public void create_event_with_incorrect_dates_throws_exeption() throws Exception {
+        public void with_incorrect_dates_throws_exeption() throws Exception {
             assertThrows(IllegalArgumentException.class, () -> eventService.createEvent(EXIST_EVENT_TITLE,
                     ERST_DATA,
                     LAST_DATA));
         }
 
         @Test
-        public void create_event_without_title_throws_exeption() throws Exception {
+        public void without_title_throws_exeption() throws Exception {
             assertThrows(IllegalArgumentException.class, () -> eventService.createEvent(" ",
                     ERST_DATA,
                     LAST_DATA));
         }
 
         @Test
-        public void create_event_returns_created_event() {
+        public void returns_created_event() {
 
             Event actual = eventService.createEvent(NOT_EXIST_EVENT_TITLE,
                     ERST_DATA,

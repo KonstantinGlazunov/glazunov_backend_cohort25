@@ -1,12 +1,13 @@
-package planer.repositories;
+package planer.repositories.impl;
 
 import planer.models.Event;
+import planer.repositories.EventsRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventRepositoryListImpl implements EventRepository {
+public class EventRepositoryListImpl implements EventsRepository {
     private final List<Event> events = new ArrayList<>();
     private Long generatedId = 1L;
 
