@@ -1,0 +1,10 @@
+### User registration
+POST localhost:8080/api/events/
+Content-Type: application/json
+
+{
+  "title": "Lection",
+  "data": "2023-10-15"
+}
+
+###

@@ -28,8 +28,15 @@ public class Event {
     @ManyToMany(mappedBy = "events")
     private Set<Participant> participants;
 
-    @ManyToOne
-    @JoinColumn(name = "site_id", nullable = false)
+   @ManyToOne
+    @JoinColumn(name = "site_id", nullable = true)
     private Site site;
 
+
+    public Event(Long id, String title, LocalDate date, Set<Participant> participants) {
+        this.id = id;
+        this.title = title;
+        this.date = date;
+        this.participants = participants;
+    }
 }
