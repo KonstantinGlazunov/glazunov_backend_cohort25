@@ -2,6 +2,7 @@ package de.ait.task_05.controllers;
 
 import de.ait.task_05.dtos.EventDto;
 import de.ait.task_05.dtos.NewEventDto;
+import de.ait.task_05.dtos.NewSiteDto;
 import de.ait.task_05.models.Event;
 import de.ait.task_05.services.EventService;
 import lombok.RequiredArgsConstructor;
@@ -42,12 +43,34 @@ public class EventsController {
                             schema = @Schema(implementation = EventDto.class))),
             @ApiResponse(responseCode = "400",
                     description = "Request error")})
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<EventDto> addEvent(@RequestBody NewEventDto newEvent) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(eventService.addEvent(newEvent));
     }
+
+    @Operation(summary = "Adding site to event", description = "only admin available")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "202",
+                    description = "Site was successfully added to event",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = EventDto.class))),
+            @ApiResponse(responseCode = "400",
+                    description = "Request error")})
+
+    @PostMapping("/{event-id}/sites/{site-id}")
+    public ResponseEntity<EventDto> addSiteToEvent(@PathVariable("event-id") Long eventId,
+            @PathVariable("site-id") Long siteId){
+        return ResponseEntity
+                .status(HttpStatus.ACCEPTED)
+                .body(eventService.addSiteToEvent(eventId,siteId));
+
+
+
+    }
+
+
 
 
 }

@@ -16,7 +16,7 @@ public class EventDto {
 
     private String date;
 
-  //  private String site;
+    private String siteId;
 
 
     public static EventDto from(Event event) {
@@ -24,6 +24,7 @@ public class EventDto {
                 .id(event.getId())
                 .title(event.getTitle())
                 .date(event.getDate().toString())
+                .siteId(event.getSite().getId().toString())
                 .build();
     }
 }

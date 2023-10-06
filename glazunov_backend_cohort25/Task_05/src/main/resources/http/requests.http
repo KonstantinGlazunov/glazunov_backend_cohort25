@@ -1,10 +1,24 @@
-### User registration
-POST localhost:8080/api/events/
+### Adding Event
+POST http://localhost:8080/api/events
 Content-Type: application/json
 
 {
   "title": "Lection",
-  "data": "2023-10-15"
+  "date": "2023-10-15"
 }
 
+### Adding Site to Event
+POST http://localhost:8080/api/events/2/sites/2
+Content-Type: application/json
+
+{
+}
+
+### Adding Site
+POST http://localhost:8080/api/sites
+Content-Type: application/json
+
+{
+  "name": "Theater Opera3"
+}
 ###

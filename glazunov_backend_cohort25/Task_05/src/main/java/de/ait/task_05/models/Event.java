@@ -25,6 +25,7 @@ public class Event {
 
     private LocalDate date;
 
+
     @ManyToMany(mappedBy = "events")
     private Set<Participant> participants;
 
@@ -33,10 +34,4 @@ public class Event {
     private Site site;
 
 
-    public Event(Long id, String title, LocalDate date, Set<Participant> participants) {
-        this.id = id;
-        this.title = title;
-        this.date = date;
-        this.participants = participants;
-    }
 }
