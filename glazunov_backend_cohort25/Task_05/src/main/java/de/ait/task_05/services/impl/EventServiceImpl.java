@@ -2,10 +2,13 @@ package de.ait.task_05.services.impl;
 
 import de.ait.task_05.dtos.EventDto;
 import de.ait.task_05.dtos.NewEventDto;
+import de.ait.task_05.dtos.ParticipantDto;
+import de.ait.task_05.dtos.ParticipantToEventDto;
 import de.ait.task_05.exeptions.RestExeption;
 import de.ait.task_05.models.Event;
-import de.ait.task_05.models.Site;
+import de.ait.task_05.models.Participant;
 import de.ait.task_05.repositories.EventsRepository;
+import de.ait.task_05.repositories.ParticipantsRepository;
 import de.ait.task_05.repositories.SitesRepository;
 import de.ait.task_05.services.EventService;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +17,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
-import static java.util.Date.from;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +26,8 @@ public class EventServiceImpl implements EventService {
 
     private final EventsRepository eventsRepository;
     private final SitesRepository sitesRepository;
+    private final ParticipantsRepository participantsRepository;
+
 
     @Override
     public EventDto addEvent(NewEventDto newEvent) {
@@ -47,14 +52,34 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public EventDto addSiteToEvent(Long eventId, Long siteId) {
-        eventsRepository.findById(eventId)
-                .orElseThrow(() -> new RestExeption(HttpStatus.NOT_FOUND, "Event with id <" + eventId + "> not found"));
-         sitesRepository.findById(siteId)
+        getEventOrThrow(eventId);
+        sitesRepository.findById(siteId)
                 .orElseThrow(() -> new RestExeption(HttpStatus.NOT_FOUND, "Site with id <" + siteId + "> not found"));
-      eventsRepository.upDateSiteId(eventId, siteId);
+        eventsRepository.upDateSiteId(eventId, siteId);
         return EventDto.from(eventsRepository.findById(eventId).get());
     }
 
+
+    @Override
+    public List<ParticipantDto> dddParticipantToEvent(Long eventId, ParticipantToEventDto participantData) {
+        Event event = getEventOrThrow(eventId);
+        Participant participant = participantsRepository.findById(participantData.getParticipantId())
+                .orElseThrow(() -> new RestExeption(HttpStatus.NOT_FOUND,
+                        "Participant with id: <" + participantData.getParticipantId() + "> not found"));
+        boolean isParticipantOnEvent = participant.getEvents().add(event);
+        if (!isParticipantOnEvent) {
+            throw new RestExeption(HttpStatus.BAD_REQUEST, "Participant with id <" + participantData.getParticipantId() +
+                    "> already in Event <" + event.getId() + ">");
+        }
+        participantsRepository.save(participant);
+        Set<Participant> participantsOfEvent = participantsRepository.findAllByEventsContainsOrderById(event);
+        return ParticipantDto.from(participantsOfEvent);
+    }
+
+    private Event getEventOrThrow(Long eventId) {
+        return eventsRepository.findById(eventId)
+                .orElseThrow(() -> new RestExeption(HttpStatus.NOT_FOUND, "Event with id <" + eventId + "> not found"));
+    }
 
 }
 

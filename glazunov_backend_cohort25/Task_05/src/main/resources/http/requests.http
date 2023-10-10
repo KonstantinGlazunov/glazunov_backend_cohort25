@@ -21,14 +21,23 @@ Content-Type: application/json
 {
   "name": "Theater Opera4"
 }
-###Adding New participant
+###Add New participant
 
 POST localhost:8080/api/participants/register
 Content-Type: application/json
 
 {
-  "name": "UserName1",
-  "email": "user1@gmail.com"
+  "name": "NewParticipantName1",
+  "email": "newuser1@gmail.com"
+}
+
+### Add participants to the event
+
+POST localhost:8080/api/events/2/participant
+Content-Type: application/json
+
+{
+  "participantId": 1
 }
 
 ###

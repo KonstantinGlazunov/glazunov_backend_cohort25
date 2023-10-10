@@ -1,8 +1,6 @@
 package de.ait.task_05.controllers;
 
-import de.ait.task_05.dtos.EventDto;
-import de.ait.task_05.dtos.NewEventDto;
-import de.ait.task_05.dtos.NewSiteDto;
+import de.ait.task_05.dtos.*;
 import de.ait.task_05.models.Event;
 import de.ait.task_05.services.EventService;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +33,7 @@ import java.util.List;
 public class EventsController {
 
     private final EventService eventService;
+
     @Operation(summary = "Adding new event", description = "only admin available")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201",
@@ -61,16 +60,29 @@ public class EventsController {
 
     @PostMapping("/{event-id}/sites/{site-id}")
     public ResponseEntity<EventDto> addSiteToEvent(@PathVariable("event-id") Long eventId,
-            @PathVariable("site-id") Long siteId){
+                                                   @PathVariable("site-id") Long siteId) {
         return ResponseEntity
                 .status(HttpStatus.ACCEPTED)
-                .body(eventService.addSiteToEvent(eventId,siteId));
-
-
-
+                .body(eventService.addSiteToEvent(eventId, siteId));
     }
 
 
+    @Operation(summary = "Adding participant to event", description = "only admin available")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "202",
+                    description = "Participant was successfully added to event",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = EventDto.class))),
+            @ApiResponse(responseCode = "400",
+                    description = "Request error")})
+
+    @PostMapping("/{event-id}/participant")
+    public ResponseEntity<List<ParticipantDto>> addParticipantToEvent(
+            @PathVariable("event-id") Long eventId,
+            @RequestBody ParticipantToEventDto participantData) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(eventService.dddParticipantToEvent(eventId, participantData));
+    }
 
 
 }

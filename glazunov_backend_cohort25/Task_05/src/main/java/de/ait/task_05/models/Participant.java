@@ -18,7 +18,8 @@ public class Participant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 20)
+
+    @Column(length = 20, nullable = false)
     private String name;
 
     @Column(nullable = false, unique = true)

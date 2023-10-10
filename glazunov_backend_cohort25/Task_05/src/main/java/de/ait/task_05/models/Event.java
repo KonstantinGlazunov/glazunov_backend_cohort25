@@ -14,6 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @Entity
+
 public class Event {
 
     @Id
