@@ -29,7 +29,7 @@ public class Event {
     @ManyToMany(mappedBy = "events")
     private Set<Participant> participants;
 
-   @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "site_id", nullable = true)
     private Site site;
 

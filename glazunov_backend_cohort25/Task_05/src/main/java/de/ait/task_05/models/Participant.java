@@ -4,11 +4,13 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Set;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
+@Table(name = "participant")
 @EqualsAndHashCode(exclude = "event")
 public class Participant {
 
@@ -16,7 +18,11 @@ public class Participant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 20)
     private String name;
+
+    @Column(nullable = false, unique = true)
+    private String email;
 
 
     @ManyToMany

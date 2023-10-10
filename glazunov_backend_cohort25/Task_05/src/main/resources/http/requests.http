@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 
 ### Adding Site to Event
-POST http://localhost:8080/api/events/2/sites/2
+POST http://localhost:8080/api/events/1/sites/1
 Content-Type: application/json
 
 {
@@ -19,6 +19,17 @@ POST http://localhost:8080/api/sites
 Content-Type: application/json
 
 {
-  "name": "Theater Opera3"
+  "name": "Theater Opera4"
 }
+###Adding New participant
+
+POST localhost:8080/api/participants/register
+Content-Type: application/json
+
+{
+  "name": "UserName1",
+  "email": "user1@gmail.com"
+}
+
 ###
+

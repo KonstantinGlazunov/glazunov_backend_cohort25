@@ -55,8 +55,7 @@ public class EventServiceImpl implements EventService {
         return EventDto.from(eventsRepository.findById(eventId).get());
     }
 
-    //  как написать upDateSite для изменения любого поля, любой строки?
-    //почему ответ 201 приходит через раз?
+
 }
 
 
