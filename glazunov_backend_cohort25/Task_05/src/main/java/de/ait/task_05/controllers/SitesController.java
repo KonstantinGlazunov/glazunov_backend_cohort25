@@ -40,4 +40,6 @@ public class SitesController {
                 .status(HttpStatus.CREATED)
                 .body(sitesService.addSite(newSite));
     }
+
+
 }

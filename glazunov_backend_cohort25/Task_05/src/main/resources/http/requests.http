@@ -10,7 +10,6 @@ Content-Type: application/json
 ### Adding Site to Event
 POST http://localhost:8080/api/events/1/sites/1
 Content-Type: application/json
-
 {
 }
 
@@ -31,7 +30,7 @@ Content-Type: application/json
   "email": "newuser1@gmail.com"
 }
 
-### Add participants to the event
+### Add participant to the event
 
 POST localhost:8080/api/events/2/participant
 Content-Type: application/json
@@ -40,5 +39,26 @@ Content-Type: application/json
   "participantId": 1
 }
 
+### Get participants of Event
+
+GET localhost:8080/api/events/2/participants
+
+### Update Event
+PUT localhost:8080/api/events/1
+Content-Type: application/json
+
+{
+"title": "Songs and dance",
+"data": "2023-11-25",
+"site": 2
+}
+
+### Delete the event
+
+DELETE localhost:8080/api/events/1
+
 ###
+
+
+
 

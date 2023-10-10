@@ -1,9 +1,6 @@
 package de.ait.task_05.services.impl;
 
-import de.ait.task_05.dtos.EventDto;
-import de.ait.task_05.dtos.NewEventDto;
-import de.ait.task_05.dtos.ParticipantDto;
-import de.ait.task_05.dtos.ParticipantToEventDto;
+import de.ait.task_05.dtos.*;
 import de.ait.task_05.exeptions.RestExeption;
 import de.ait.task_05.models.Event;
 import de.ait.task_05.models.Participant;
@@ -61,7 +58,7 @@ public class EventServiceImpl implements EventService {
 
 
     @Override
-    public List<ParticipantDto> dddParticipantToEvent(Long eventId, ParticipantToEventDto participantData) {
+    public List<ParticipantDto> addParticipantToEvent(Long eventId, ParticipantToEventDto participantData) {
         Event event = getEventOrThrow(eventId);
         Participant participant = participantsRepository.findById(participantData.getParticipantId())
                 .orElseThrow(() -> new RestExeption(HttpStatus.NOT_FOUND,
@@ -80,6 +77,37 @@ public class EventServiceImpl implements EventService {
         return eventsRepository.findById(eventId)
                 .orElseThrow(() -> new RestExeption(HttpStatus.NOT_FOUND, "Event with id <" + eventId + "> not found"));
     }
+
+
+    @Override
+    public List<ParticipantDto> getParticipantsOfEvent(Long eventId) {
+        Event event = getEventOrThrow(eventId);
+        Set<Participant> participantsOfEvent = participantsRepository.findAllByEventsContainsOrderById(event);
+        return ParticipantDto.from(participantsOfEvent);
+    }
+
+    @Override
+    public EventDto updateEvent(Long eventId, UpdateEventDto eventDataForUpdate) {
+        Event event = getEventOrThrow(eventId);
+        if (event.getTitle() != null) {
+            event.setTitle(eventDataForUpdate.getTitle());
+        } else {
+            event.setTitle(null);
+        }
+        if (event.getDate() != null) {
+            event.setDate(LocalDate.parse(eventDataForUpdate.getData()));
+        } else {
+            event.setDate(null);
+        }
+        if (event.getSite() != null) {
+            event.setSite(sitesRepository.getSiteById(eventDataForUpdate.getSite()));
+        } else {
+            event.setSite(null);
+        }
+        eventsRepository.save(event);
+        return EventDto.from(event);
+    }
+
 
 }
 
