@@ -11,7 +11,6 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name = "participant")
-@EqualsAndHashCode(exclude = "event")
 public class Participant {
 
     @Id
@@ -35,5 +34,6 @@ public class Participant {
             @JoinColumn(name = "event_id", nullable = false, referencedColumnName = "id"),
             uniqueConstraints = @UniqueConstraint(columnNames = {"participant_id", "event_id"})
     )
+    @EqualsAndHashCode.Exclude
     private Set<Event> events;
 }

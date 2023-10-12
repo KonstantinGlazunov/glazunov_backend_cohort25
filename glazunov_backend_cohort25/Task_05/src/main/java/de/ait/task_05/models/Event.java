@@ -1,10 +1,7 @@
 package de.ait.task_05.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -28,10 +25,12 @@ public class Event {
 
 
     @ManyToMany(mappedBy = "events")
+    @EqualsAndHashCode.Exclude
     private Set<Participant> participants;
 
     @ManyToOne
     @JoinColumn(name = "site_id", nullable = true)
+    @EqualsAndHashCode.Exclude
     private Site site;
 
 

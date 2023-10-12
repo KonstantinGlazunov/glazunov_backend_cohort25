@@ -1,4 +1,4 @@
-package de.ait.task_05.dtos;
+package de.ait.task_05.dtos.eventsDtos;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

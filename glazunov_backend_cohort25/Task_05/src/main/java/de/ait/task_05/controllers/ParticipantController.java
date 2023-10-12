@@ -1,10 +1,7 @@
 package de.ait.task_05.controllers;
 
-import de.ait.task_05.dtos.EventDto;
-import de.ait.task_05.dtos.NewEventDto;
 import de.ait.task_05.dtos.NewParticipantDto;
 import de.ait.task_05.dtos.ParticipantDto;
-import de.ait.task_05.services.EventService;
 import de.ait.task_05.services.ParticipantService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

@@ -1,10 +1,7 @@
 package de.ait.task_05.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Set;
 @Data
@@ -20,5 +17,6 @@ public class Site {
     private String name;
 
     @OneToMany (mappedBy = "site")
+    @EqualsAndHashCode.Exclude
     private Set<Event> events;
 }

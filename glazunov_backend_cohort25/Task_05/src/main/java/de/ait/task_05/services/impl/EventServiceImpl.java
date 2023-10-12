@@ -1,6 +1,9 @@
 package de.ait.task_05.services.impl;
 
 import de.ait.task_05.dtos.*;
+import de.ait.task_05.dtos.eventsDtos.EventDto;
+import de.ait.task_05.dtos.eventsDtos.NewEventDto;
+import de.ait.task_05.dtos.eventsDtos.UpdateEventDto;
 import de.ait.task_05.exeptions.RestExeption;
 import de.ait.task_05.models.Event;
 import de.ait.task_05.models.Participant;
@@ -63,8 +66,8 @@ public class EventServiceImpl implements EventService {
         Participant participant = participantsRepository.findById(participantData.getParticipantId())
                 .orElseThrow(() -> new RestExeption(HttpStatus.NOT_FOUND,
                         "Participant with id: <" + participantData.getParticipantId() + "> not found"));
-        boolean isParticipantOnEvent = participant.getEvents().add(event);
-        if (!isParticipantOnEvent) {
+        boolean isParticipantAlreadyOnEvent = participant.getEvents().add(event);
+        if (!isParticipantAlreadyOnEvent) {
             throw new RestExeption(HttpStatus.BAD_REQUEST, "Participant with id <" + participantData.getParticipantId() +
                     "> already in Event <" + event.getId() + ">");
         }
@@ -89,17 +92,17 @@ public class EventServiceImpl implements EventService {
     @Override
     public EventDto updateEvent(Long eventId, UpdateEventDto eventDataForUpdate) {
         Event event = getEventOrThrow(eventId);
-        if (event.getTitle() != null) {
+        if (eventDataForUpdate.getTitle() != null) {
             event.setTitle(eventDataForUpdate.getTitle());
         } else {
-            event.setTitle(null);
+            eventDataForUpdate.setTitle(null);
         }
-        if (event.getDate() != null) {
+        if (eventDataForUpdate.getData() != null) {
             event.setDate(LocalDate.parse(eventDataForUpdate.getData()));
         } else {
             event.setDate(null);
         }
-        if (event.getSite() != null) {
+        if (eventDataForUpdate.getSite() != null) {
             event.setSite(sitesRepository.getSiteById(eventDataForUpdate.getSite()));
         } else {
             event.setSite(null);

@@ -10,8 +10,7 @@ Content-Type: application/json
 ### Adding Site to Event
 POST http://localhost:8080/api/events/1/sites/1
 Content-Type: application/json
-{
-}
+
 
 ### Adding Site
 POST http://localhost:8080/api/sites
@@ -50,12 +49,12 @@ Content-Type: application/json
 {
 "title": "Songs and dance",
 "data": "2023-11-25",
-"site": 2
+"site": 1
 }
 
 ### Delete the event
 
-DELETE localhost:8080/api/events/1
+DELETE localhost:8080/api/sites/1
 
 ###
 

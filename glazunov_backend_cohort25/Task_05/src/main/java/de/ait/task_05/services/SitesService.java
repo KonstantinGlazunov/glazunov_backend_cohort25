@@ -14,4 +14,5 @@ public interface SitesService {
     SiteDto getSite(Long siteId);
 
 
+    SiteDto deleteSite(Long siteId);
 }

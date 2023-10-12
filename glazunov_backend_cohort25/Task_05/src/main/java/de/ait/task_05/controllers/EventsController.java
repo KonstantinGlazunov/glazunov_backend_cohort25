@@ -1,6 +1,9 @@
 package de.ait.task_05.controllers;
 
 import de.ait.task_05.dtos.*;
+import de.ait.task_05.dtos.eventsDtos.EventDto;
+import de.ait.task_05.dtos.eventsDtos.NewEventDto;
+import de.ait.task_05.dtos.eventsDtos.UpdateEventDto;
 import de.ait.task_05.services.EventService;
 import de.ait.task_05.services.ParticipantService;
 import lombok.RequiredArgsConstructor;
@@ -89,11 +92,13 @@ public class EventsController {
     }
 
     @Operation(summary = "Update Event", description = "only admin available")
-    @PutMapping("/events/{event-id}")
+    @PutMapping("/{event-id}")
     public ResponseEntity<EventDto> updateEvent(@PathVariable("event-id") Long eventId,
                                                 @RequestBody UpdateEventDto eventDataForUpdate) {
         return ResponseEntity
                 .ok(eventService.updateEvent(eventId, eventDataForUpdate));
     }
+
+
 
 }

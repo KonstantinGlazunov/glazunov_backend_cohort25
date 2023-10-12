@@ -1,4 +1,4 @@
-package de.ait.task_05.dtos;
+package de.ait.task_05.dtos.eventsDtos;
 
 import de.ait.task_05.models.Event;
 import lombok.AllArgsConstructor;

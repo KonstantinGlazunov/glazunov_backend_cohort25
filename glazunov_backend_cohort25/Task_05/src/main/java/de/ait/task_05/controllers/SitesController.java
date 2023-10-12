@@ -1,6 +1,5 @@
 package de.ait.task_05.controllers;
 
-import de.ait.task_05.dtos.NewEventDto;
 import de.ait.task_05.dtos.NewSiteDto;
 import de.ait.task_05.dtos.SiteDto;
 import de.ait.task_05.services.SitesService;
@@ -14,10 +13,7 @@ import io.swagger.v3.oas.annotations.tags.Tags;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -41,5 +37,20 @@ public class SitesController {
                 .body(sitesService.addSite(newSite));
     }
 
+    @Operation(summary = "Delete Site from Event and from Sites ", description = "only admin available")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Site was successfully deleted",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = SiteDto.class))),
 
+            @ApiResponse(responseCode = "400",
+                    description = "Request error"),
+            @ApiResponse(responseCode = "404",
+                    description = "Site not found")})
+
+    @DeleteMapping("/{site-id}")
+    public ResponseEntity<SiteDto> deleteSite(@PathVariable("site-id") Long siteId){
+        return ResponseEntity.ok(sitesService.deleteSite(siteId));
+    }
 }
