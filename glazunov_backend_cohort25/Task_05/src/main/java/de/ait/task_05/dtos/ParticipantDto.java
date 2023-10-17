@@ -23,12 +23,16 @@ public class ParticipantDto {
     private String name;
     @Schema(description = "ParticipantEmail", example = "user@mail.com")
     private String email;
+    @Schema(description = "Роль пользователя", example = "USER")
+    private String role;
 
-public static ParticipantDto from (Participant participant){
+
+    public static ParticipantDto from (Participant participant){
     return ParticipantDto.builder()
             .id(participant.getId())
             .name(participant.getName())
             .email(participant.getEmail())
+            .role(participant.getRole().toString())
             .build();
 }
 public static List<ParticipantDto> from (Set<Participant> participants){

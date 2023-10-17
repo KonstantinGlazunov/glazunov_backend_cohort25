@@ -6,6 +6,7 @@ import de.ait.task_05.dtos.eventsDtos.NewEventDto;
 import de.ait.task_05.dtos.eventsDtos.UpdateEventDto;
 import de.ait.task_05.services.EventService;
 import de.ait.task_05.services.ParticipantService;
+import de.ait.task_05.validation.dto.ValidationErrorsDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ import io.swagger.v3.oas.annotations.tags.Tags;
 
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -42,9 +44,11 @@ public class EventsController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = EventDto.class))),
             @ApiResponse(responseCode = "400",
-                    description = "Request error")})
+                    description = "Validation error",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ValidationErrorsDto.class)))})
     @PostMapping
-    public ResponseEntity<EventDto> addEvent(@RequestBody NewEventDto newEvent) {
+    public ResponseEntity<EventDto> addEvent(@RequestBody @Valid NewEventDto newEvent) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(eventService.addEvent(newEvent));
@@ -60,7 +64,7 @@ public class EventsController {
                     description = "Request error")})
 
     @PostMapping("/{event-id}/sites/{site-id}")
-    public ResponseEntity<EventDto> addSiteToEvent(@PathVariable("event-id") Long eventId,
+    public ResponseEntity<EventDto> addSiteToEvent(@PathVariable ("event-id") Long eventId,
                                                    @PathVariable("site-id") Long siteId) {
         return ResponseEntity
                 .status(HttpStatus.ACCEPTED)
@@ -80,7 +84,7 @@ public class EventsController {
     @PostMapping("/{event-id}/participant")
     public ResponseEntity<List<ParticipantDto>> addParticipantToEvent(
             @PathVariable("event-id") Long eventId,
-            @RequestBody ParticipantToEventDto participantData) {
+            @RequestBody @Valid ParticipantToEventDto participantData) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(eventService.addParticipantToEvent(eventId, participantData));
     }

@@ -3,7 +3,7 @@ POST http://localhost:8080/api/events
 Content-Type: application/json
 
 {
-  "title": "Lection",
+  "title": "Lection2",
   "date": "2023-10-15"
 }
 
@@ -17,7 +17,7 @@ POST http://localhost:8080/api/sites
 Content-Type: application/json
 
 {
-  "name": "Theater Opera4"
+  "name": "Theater Opera5"
 }
 ###Add New participant
 
@@ -25,8 +25,9 @@ POST localhost:8080/api/participants/register
 Content-Type: application/json
 
 {
-  "name": "NewParticipantName1",
-  "email": "newuser1@gmail.com"
+  "name": "NewParticipantName2",
+  "email": "newuser2@gmail.com",
+  "password": "Qwerty007!"
 }
 
 ### Add participant to the event
@@ -47,8 +48,8 @@ PUT localhost:8080/api/events/1
 Content-Type: application/json
 
 {
-"title": "Songs and dance",
-"data": "2023-11-25",
+"title": "Songs and dance2",
+"data": "2023-11-26",
 "site": 1
 }
 
@@ -58,6 +59,6 @@ DELETE localhost:8080/api/sites/1
 
 ###
 
-
+95fba71e-3cb0-4716-aca1-179c4d02819f
 
 

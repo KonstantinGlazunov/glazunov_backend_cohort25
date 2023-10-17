@@ -1,0 +1,75 @@
+### Вход
+
+POST  localhost:8080/login
+Content-Type: application/x-www-form-urlencoded
+
+username=admin@admin.com&password=Qwerty007!
+
+### Adding Event
+POST http://localhost:8080/api/events
+Content-Type: application/json
+
+{
+  "title": "Lection",
+  "date": "2023-10-15"
+}
+
+### Adding Site to Event
+POST http://localhost:8080/api/events/1/sites/2
+Content-Type: application/json
+
+
+### Adding Site
+POST http://localhost:8080/api/sites
+Content-Type: application/json
+
+{
+  "name": "Theater Opera4"
+}
+###Add New user
+
+POST localhost:8080/api/users/register
+Content-Type: application/json
+
+{
+  "name": "Administrator",
+  "email": "admin1@admin.com",
+  "password": "Qwerty007!"
+}
+
+### Add user to the event
+
+POST localhost:8080/api/events/2/user
+Content-Type: application/json
+
+{
+  "userId": 1
+}
+
+### Get users of Event
+
+GET localhost:8080/api/events/2/users
+
+### Update Event
+PUT localhost:8080/api/events/1
+Content-Type: application/json
+
+{
+"title": "Songs and dance",
+"data": "2023-11-25",
+"site": 1
+}
+
+### Delete the event
+
+DELETE localhost:8080/api/sites/1
+
+###
+// Task05 from GitHub
+/* у меня пока нет проверки пароля, хочу что б просто пароль отображался в таблице,
+//потом сделать ехо хеширование
+//птом security
+// и скорее всего лучше user переименовать в user
+
+
+

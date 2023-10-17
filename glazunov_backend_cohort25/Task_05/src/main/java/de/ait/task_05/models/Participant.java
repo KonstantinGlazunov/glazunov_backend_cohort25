@@ -11,7 +11,12 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name = "participant")
+//@EqualsAndHashCode(exclude = "events")
 public class Participant {
+
+    public enum Role {
+        ADMIN, MANAGER, USER
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +28,13 @@ public class Participant {
 
     @Column(nullable = false, unique = true)
     private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Column(nullable = false)
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
 
 
     @ManyToMany

@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Data
 @Schema(name = "New participant", description = "Registration data")
@@ -18,5 +19,10 @@ public class NewParticipantDto {
     @NotNull
     @Schema(description = "Participant Email", example = "user@mail.com")
     private String email;
+
+    @NotNull
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$")
+    @Schema(description = "Пароль пользователя", example = "Qwerty007!")
+    private String password;
 
 }

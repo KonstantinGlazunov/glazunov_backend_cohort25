@@ -10,6 +10,8 @@ import de.ait.task_05.services.EventService;
 import de.ait.task_05.services.ParticipantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +21,9 @@ import java.util.List;
 public class ParticipantServiceImpl implements ParticipantService {
 
     private final ParticipantsRepository participantsRepository;
+
+    private final PasswordEncoder passwordEncoder;
+
     @Override
     public ParticipantDto register(NewParticipantDto newParticipant) {
         if (participantsRepository.existsByEmail(newParticipant.getEmail())){
@@ -28,6 +33,8 @@ public class ParticipantServiceImpl implements ParticipantService {
         Participant participant = Participant.builder()
                 .name(newParticipant.getName())
                 .email(newParticipant.getEmail())
+                .password(passwordEncoder.encode(newParticipant.getPassword()))
+                .role(Participant.Role.USER)
                 .build();
         participantsRepository.save(participant);
         return ParticipantDto.from(participant);
