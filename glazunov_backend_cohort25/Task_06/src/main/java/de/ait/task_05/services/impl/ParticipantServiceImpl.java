@@ -35,8 +35,8 @@ public class ParticipantServiceImpl implements UserService {
     }
 
     @Override
-    public Object getUserById(Long currentUserId) {
-        return usersRepository.findById(currentUserId).orElseThrow();
+    public UserDto getUserById(Long currentUserId) {
+        return UserDto.from(usersRepository.findById(currentUserId).orElseThrow());
     }
 
     @Override
