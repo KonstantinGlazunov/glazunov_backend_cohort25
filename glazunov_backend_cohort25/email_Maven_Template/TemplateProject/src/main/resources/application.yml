@@ -1,0 +1,27 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  mail:
+    username: 100polok2018@gmail.com
+    password: hizlklhalrxaqceg
+    host: smtp.gmail.com
+    port: 587
+    properties:
+      mail:
+        debug: true
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+        mail: DEBUG
